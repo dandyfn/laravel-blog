@@ -15,10 +15,11 @@ class PostSeeder extends Seeder
     {
         //
         $judul=[
-            'judul 1',
-             'judul 2',
-              'judul 3',
-               'judul 3',
+            'Pertaruhan Cinta',
+             'Cara Meminum Ramune',
+              'Aturan Anti Cinta',
+               'Aitakata',
+               'Aitakata'
         ];
 
         foreach ($judul as $j) {

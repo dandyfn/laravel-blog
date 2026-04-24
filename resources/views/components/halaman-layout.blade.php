@@ -9,5 +9,8 @@
 </head>
 <body>
     <h1>halo from component</h1>
+    <p>jumlah : {{ $jumlah }}</p>
+    <p>status : {{ $status }}</p>
+    {{ $slot }}
 </body>
 </html>

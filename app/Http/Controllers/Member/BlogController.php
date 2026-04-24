@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Member;
 use App\Http\Controllers\Controller;
 use App\Models\Post;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class BlogController extends Controller
 {
@@ -14,8 +15,10 @@ class BlogController extends Controller
     public function index()
     {
         //
-        $data = Post::all();
-        print_r($data);
+        $user = Auth::user();
+        
+        $data = Post::where('user_id',$user->id)->orderBy('id','desc')->get();
+        return view('member.blogs.index');
     }
 
     /**

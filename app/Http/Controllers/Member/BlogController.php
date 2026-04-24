@@ -18,7 +18,7 @@ class BlogController extends Controller
         $user = Auth::user();
         
         $data = Post::where('user_id',$user->id)->orderBy('id','desc')->get();
-        return view('member.blogs.index');
+        return view('member.blogs.index',compact('data'));
     }
 
     /**

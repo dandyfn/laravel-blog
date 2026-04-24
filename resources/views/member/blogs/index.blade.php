@@ -21,16 +21,17 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="border px-6 py-4 text-center">1</td>
+                            @foreach ($data as $key => $value)
+                                  <tr>
+                                <td class="border px-6 py-4 text-center">{{ $loop->iteration }}</td>
                                 <td class="border px-6 py-4">
-                                    Selamat Datang di Tutorial Laravel
+                                    {{ $value->title }}
                                     <div class="block lg:hidden text-sm text-gray-500">
-                                        draft | Kamis, 29 Agustus 2024
+                                        {{ $value->status }} | {{ $value->created_at->isoFormat('dddd, D MMMM Y') }}
                                     </div>
                                 </td>
-                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">Kamis, 29 Agustus 2024</td>
-                                <td class="border px-6 py-4 text-center text-sm hidden lg:table-cell">draft</td>
+                                <td class="border px-6 py-4 text-center text-gray-500 text-sm hidden lg:table-cell">{{ $value->created_at->isoFormat('dddd, D MMMM Y') }}</td>
+                                <td class="border px-6 py-4 text-center text-sm hidden lg:table-cell"> {{ $value->status }}</td>
                                 <td class="border px-6 py-4 text-center">
                                     <a href='' class="text-blue-600 hover:text-blue-400 px-2">edit</a>
                                     <a href='' class="text-blue-600 hover:text-blue-400 px-2">lihat</a>
@@ -38,7 +39,9 @@
                                         hapus
                                     </button>
                                 </td>
-                            </tr>
+                            </tr>  
+                            @endforeach
+                        
                         </tbody>
                     </table>
                 </div>

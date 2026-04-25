@@ -17,7 +17,7 @@ class BlogController extends Controller
         //
         $user = Auth::user();
         
-        $data = Post::where('user_id',$user->id)->orderBy('id','desc')->get();
+        $data = Post::where('user_id',$user->id)->orderBy('id','desc')->paginate(3);
         return view('member.blogs.index',compact('data'));
     }
 
@@ -51,6 +51,7 @@ class BlogController extends Controller
     public function edit(Post $post)
     {
         //
+        dd($post);
     }
 
     /**

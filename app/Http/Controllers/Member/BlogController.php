@@ -51,7 +51,8 @@ class BlogController extends Controller
     public function edit(Post $post)
     {
         //
-        dd($post);
+        // print_r($post);
+        return view('member.blogs.edit');
     }
 
     /**

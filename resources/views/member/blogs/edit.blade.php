@@ -19,7 +19,7 @@
                             </p>
                         </header>
 
-                        <form method="post" action="" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('member.blogs.update',['blog'=>$data->id]) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
                             @method('put')
 
@@ -33,10 +33,10 @@
            </div>
                       <div>
             <x-input-label for="file_input" value="Thumbnail" />
-            <input type="file" class="w-full border border-grey-300 rounded-sm" />
+            <input type="file" class="w-full border border-grey-300 rounded-sm" name="thumbail" />
            </div>
            <div>
-             <x-textarea-trix value="{{ $data->content }}" id="x" name="content"></x-textarea-trix>
+             <x-textarea-trix value="{{ old(!!'content',$data->content) }}" id="x" name="content"></x-textarea-trix>
            </div>
            <div>
             <x-select name="status">

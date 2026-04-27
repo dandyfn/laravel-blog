@@ -25,24 +25,24 @@
 
                               <div>
             <x-input-label for="title" value="Title" />
-            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" />
-           </div>
+            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" value="{{ old('title',$data->title) }}"/>
+           </div >
                       <div>
             <x-input-label for="description" value="description" />
-            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full" />
+            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"  value="{{ old('description',$data->description) }}" />
            </div>
                       <div>
             <x-input-label for="file_input" value="Thumbnail" />
             <input type="file" class="w-full border border-grey-300 rounded-sm" />
            </div>
            <div>
-              <input id="x" type="hidden" name="content">
+              <input id="x" type="hidden" value="{{!! old('content',$data->content) !!}}" name="content">
               <trix-editor input="x"></trix-editor class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm min-h-80">
            </div>
            <div>
             <select name="status" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
-                <option value="draf">draf</option>
-                <option value="publish">publish</option>
+                <option value="draf" {{ (old('status',$data->status)=='draft')?'selected':''}} >draf</option>
+                <option value="publish" {{ (old('status',$data->status)=='publish')?'selected':''}} >publish</option>
             </select>
            </div>
            <div class="flex items-center gap-4">

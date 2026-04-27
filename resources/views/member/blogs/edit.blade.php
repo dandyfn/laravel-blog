@@ -36,14 +36,13 @@
             <input type="file" class="w-full border border-grey-300 rounded-sm" />
            </div>
            <div>
-              <input id="x" type="hidden" value="{{!! old('content',$data->content) !!}}" name="content">
-              <trix-editor input="x"></trix-editor class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm min-h-80">
+             <x-textarea-trix value="{{ $data->content }}" id="x" name="content"></x-textarea-trix>
            </div>
            <div>
-            <select name="status" class="border-gray-300 focus:border-indigo-500 focus:ring-indigo-500 rounded-md shadow-sm">
+            <x-select name="status">
                 <option value="draf" {{ (old('status',$data->status)=='draft')?'selected':''}} >draf</option>
                 <option value="publish" {{ (old('status',$data->status)=='publish')?'selected':''}} >publish</option>
-            </select>
+           </x-select>
            </div>
            <div class="flex items-center gap-4">
             <a href="{{ route('member.blogs.index') }}">

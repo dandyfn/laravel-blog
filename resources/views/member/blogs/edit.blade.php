@@ -33,7 +33,7 @@
            </div>
                       <div>
                         @isset($data->thumbnail)
-                            <img src="{{ asset('thumbnails/'.$data->thumbnail) }}" class="rounded-md border-gray-300 max-w-40 p-2" alt="">
+                            <img src="{{ asset(getenv('CUSTOM_THUMBNAIL_LOCATION').'/'.$data->thumbnail) }}" class="rounded-md border-gray-300 max-w-40 p-2" alt="">
                         @endisset
             <x-input-label for="file_input" value="Thumbnail" />
             <input type="file" class="w-full border border-grey-300 rounded-sm" name="thumbnail" />

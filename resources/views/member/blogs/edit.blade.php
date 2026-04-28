@@ -19,7 +19,7 @@
                             </p>
                         </header>
 
-                        <form method="post" action="{{ route('member.blogs.update',['blog'=>$data->id]) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('member.blogs.update',['post'=>$data->id]) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
                             @method('put')
 
@@ -32,16 +32,20 @@
             <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"  value="{{ old('description',$data->description) }}" />
            </div>
                       <div>
+                        @isset($data->thumbnail)
+                            <img src="{{ asset('thumbnails/'.$data->thumbnail) }}" class="rounded-md border-gray-300 max-w-40 p-2" alt="">
+                        @endisset
             <x-input-label for="file_input" value="Thumbnail" />
-            <input type="file" class="w-full border border-grey-300 rounded-sm" name="thumbail" />
+            <input type="file" class="w-full border border-grey-300 rounded-sm" name="thumbnail" />
            </div>
            <div>
-             <x-textarea-trix value="{{ old(!!'content',$data->content) }}" id="x" name="content"></x-textarea-trix>
+             <input id="content" type="hidden" name="content" value="{{ old('content', $data->content) }}">
+             <trix-editor input="content"></trix-editor>
            </div>
            <div>
             <x-select name="status">
-                <option value="draf" {{ (old('status',$data->status)=='draft')?'selected':''}} >draf</option>
-                <option value="publish" {{ (old('status',$data->status)=='publish')?'selected':''}} >publish</option>
+                <option value="draft" {{ (old('status',$data->status)=='draft')?'selected':'' }}>draft</option>
+                <option value="publish" {{ (old('status',$data->status)=='publish')?'selected':'' }}>publish</option>  
            </x-select>
            </div>
            <div class="flex items-center gap-4">

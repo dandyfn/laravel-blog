@@ -28,6 +28,7 @@ class BlogController extends Controller
     public function create()
     {
         //
+        return view('member.blogs.create');
     }
 
     /**
@@ -36,6 +37,38 @@ class BlogController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'title'=>'required',
+            'content'=>'required',
+            'thumbnail'=>'image|mimes:jpeg,jpg,png|max:10240'
+        ],[
+            'title.required' => 'judul wajib diisi',
+            'content.required' => 'content wajib diisi',
+            'thumbnail.image' => 'hanya gambar yang bisa',
+            'thumbnail.mimes' => 'hanya format jpeg,jpg,png',
+            'thumbnail.max' => 'maksimal 10mb'
+
+        ]);
+
+        if($request->hasFile('thumbnail')){
+          
+            $image = $request->file('thumbnail');
+            $image_name = time()."_".$image->getClientOriginalName();
+            $destination_path = public_path(getenv('CUSTOM_THUMBNAIL_LOCATION'));
+            $image->move($destination_path,$image_name );
+        }
+
+        $data = [
+            'title'=>$request->title,
+            'description'=>$request->description,
+            'content'=>$request->content,
+            'status'=>$request->status,
+            'thumbnail'=>isset($image_name)?$image_name:null,
+            'slug'=>$this->generateslug($request->title),
+            'user_id'=>Auth::user()->id
+        ];
+        Post::create($data);
+        return redirect()->route('member.blogs.index')->with('success','data berhasil ditambahkan');
     }
 
     /**
@@ -107,7 +140,7 @@ class BlogController extends Controller
         //
     }
 
-    private function generateslug ($title, $id){
+    private function generateslug ($title, $id=null){
         $slug = Str::slug($title);
         $count = Post::where('slug',$slug)->when($id, function($query,$id){
             return $query->where('id','!=',$id);

@@ -18,18 +18,24 @@
     <body>
       @include('components.front.navigation')
         <!-- Page Header-->
-        <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
+     
+              <header class="masthead" style="background-image: url('assets/img/home-bg.jpg')">
             <div class="container position-relative px-4 px-lg-5">
                 <div class="row gx-4 gx-lg-5 justify-content-center">
                     <div class="col-md-10 col-lg-8 col-xl-7">
                         <div class="site-heading">
-                            <h1>Clean Blog</h1>
-                            <span class="subheading">A Blog Theme by Start Bootstrap</span>
+                            <a href='{{ $pageHeaderLink ?? "#" }}' class="text-white"> <h1>{{ $pageHeader ?? 'JKT 48 Post' }}</h1></a>
+                         
+                                <span class="subheading">{{ $pageSubheading ?? 'JKT 48 Fight' }}</span>
+                          
+                           
                         </div>
                     </div>
                 </div>
             </div>
-        </header>
+        </header> 
+        
+     
         {{ $slot }}
          <!-- Footer-->
           <footer class="border-top">

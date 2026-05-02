@@ -9,6 +9,7 @@ class BlogdetailController extends Controller
 {
     //
     function detail($slug) {
-        echo $slug;
+        // echo $slug;
+        return view('components.front.blog-detail');
     }
 }

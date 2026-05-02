@@ -1,5 +1,5 @@
 <x-front.layout>
-    {{-- <x-slot name="pageHeader">
+      <x-slot name="pageHeader">
         {{ $lastData->title }}
     </x-slot>
     <x-slot name="pageSubheading">
@@ -10,10 +10,10 @@
         )}}
     </x-slot>
     <x-slot name="pageHeaderLink">
-        {{ route('blog-detail',['slug'=>$lastData->slug]) }}
-    </x-slot> --}}
-     <!-- Main Content-->
-        <div class="container px-4 px-lg-5">
+        {{ router('blog-detail',['slug'=>$lastData->slug]) }}
+    <!-- Main Content-->
+         <article class="mb-4">
+         <div class="container px-4 px-lg-5">
             <div class="row gx-4 gx-lg-5 justify-content-center">
                 <div class="col-md-10 col-lg-8 col-xl-7">
                
@@ -41,6 +41,8 @@
                 </div>
             </div>
         </div>
+         </article>
+        
         <!-- Footer-->
 </x-front.layout>    
       

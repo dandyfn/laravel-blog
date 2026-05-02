@@ -34,18 +34,30 @@
                     link="{{ route('blog-detail',['slug'=>$value->slug]) }}" />    
               @endforeach --}}
                     <!-- Pager-->
-                    <div class="d-flex justify-content-between mb-4">
+                    <div class="d-flex justify-content-between mb-4 mt-4">
                         <div> 
                             {{-- @if (!$data->onFirstPage())
                                 <a class="btn btn-primary text-uppercase" href="{{ $data->previousPageUrl() }}"> &larr; Newer Posts →</a>
                             @endif --}}
-                            
+                            @if ($pagination['next'])
+                                <a href="{{ route('blog-detail',['slug'=>$pagination['next']->slug]) }}">&larr;
+                                    {{ $pagination['next']->title }}
+                                </a>
+                            @else
+                                <span></span>
+                            @endif
                         </div>
                         <div> 
                             {{-- @if ($data->hasMorePages())
                                  <a class="btn btn-primary text-uppercase" href="{{ $data->nextPageUrl() }}">Older Posts→ &rarr;</a>
                             @endif --}}
-                           
+                             @if ($pagination['prev'])
+                                <a href="{{ route('blog-detail',['slug'=>$pagination['prev']->slug]) }}">
+                                    {{ $pagination['prev']->title }}&rarr;
+                                </a>
+                            @else
+                                <span></span>
+                            @endif
                         </div>
                     </div>
                 </div>

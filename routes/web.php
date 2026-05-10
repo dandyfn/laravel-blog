@@ -5,6 +5,7 @@ use App\Http\Controllers\Front\HomepageController;
 use App\Http\Controllers\Front\PagedetailController;
 use App\Http\Controllers\Member\BlogController;
 use App\Http\Controllers\Member\PageController;
+use App\Http\Controllers\Member\UserController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -41,6 +42,15 @@ Route::middleware(['auth','verified'])->group(function () {
         'destroy' => 'member.pages.destroy'
     ])->parameters([
         'pages'=>'post'
+    ]);
+
+    Route::resource('member/users',UserController::class)->names([
+        'index' => 'member.users.index',
+        'edit' => 'member.users.edit',
+        'update' => 'member.users.update',
+        'create' => 'member.users.create',
+        'store' => 'member.users.store',
+        'destroy' => 'member.users.destroy'
     ]);
 });
 

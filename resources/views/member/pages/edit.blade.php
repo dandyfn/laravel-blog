@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Tambah Tulisan
+            Edit Page
         </h2>
     </x-slot>
     <div class="py-12">
@@ -11,43 +11,45 @@
                     <section>
                         <header>
                             <h2 class="text-lg font-medium text-gray-900">
-                                 Tambah Setlist
+                                Edit Data Page
                             </h2>
 
                             <p class="mt-1 text-sm text-gray-600">
-                                Silakan melakukan penambahan data
+                                Silakan melakukan perubahan data
                             </p>
                         </header>
 
-                        <form method="post" action="{{ route('member.blogs.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('member.pages.update',['post'=>$data->id]) }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
-                           
+                            @method('put')
 
                               <div>
             <x-input-label for="title" value="Title" />
-            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" value="{{ old('title') }}"/>
+            <x-text-input id="title" name="title" type="text" class="mt-1 block w-full" value="{{ old('title',$data->title) }}"/>
            </div >
                       <div>
             <x-input-label for="description" value="description" />
-            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"  value="{{ old('description') }}" />
+            <x-text-input id="description" name="description" type="text" class="mt-1 block w-full"  value="{{ old('description',$data->description) }}" />
            </div>
                       <div>
-                        
+                        @isset($data->thumbnail)
+                            <img src="{{ asset(getenv('CUSTOM_THUMBNAIL_LOCATION').'/'.$data->thumbnail) }}" class="rounded-md border-gray-300 max-w-40 p-2" alt="">
+                        @endisset
             <x-input-label for="file_input" value="Thumbnail" />
             <input type="file" class="w-full border border-grey-300 rounded-sm" name="thumbnail" />
            </div>
            <div>
-             <input id="content" type="hidden" name="content" value="{{ old('content') }}">
+             <input id="content" type="hidden" name="content" value="{{ old('content', $data->content) }}">
              <trix-editor input="content"></trix-editor>
            </div>
            <div>
             <x-select name="status">
-                <option value="draft" {{ (old('status')=='draft')?'selected':'' }}>draft</option>
-                <option value="publish" {{ (old('status')=='publish')?'selected':'' }}>publish</option>  
+                <option value="draft" {{ (old('status',$data->status)=='draft')?'selected':'' }}>draft</option>
+                <option value="publish" {{ (old('status',$data->status)=='publish')?'selected':'' }}>publish</option>  
            </x-select>
            </div>
            <div class="flex items-center gap-4">
-            <a href="{{ route('member.blogs.index') }}">
+            <a href="{{ route('member.pages.index') }}">
                 <x-secondary-button>kembali</x-secondary-button>
             </a>
             <x-primary-button>simpan</x-primary-button>

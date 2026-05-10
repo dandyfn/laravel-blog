@@ -93,6 +93,11 @@ class BlogController extends Controller
      */
     public function edit(Post $post)
     {
+         if ($post->type != $this->type) {
+            # code...
+            return redirect()->route('member.blogs.index');
+        }
+
         Gate::authorize('edit',$post);
         // print_r($post);
         $data = $post;

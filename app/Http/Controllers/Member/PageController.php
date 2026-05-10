@@ -95,6 +95,10 @@ class PageController extends Controller
     {
         // Gate::authorize('edit',$post);
         // print_r($post);
+        if ($post->type != $this->type) {
+            # code...
+            return redirect()->route('member.pages.index');
+        }
         $data = $post;
         return view('member.pages.edit',compact('data'));
     }

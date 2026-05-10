@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Tambah Tulisan
+            Tambah Page
         </h2>
     </x-slot>
     <div class="py-12">
@@ -11,7 +11,7 @@
                     <section>
                         <header>
                             <h2 class="text-lg font-medium text-gray-900">
-                                 Tambah Setlist
+                                 Tambah Pages
                             </h2>
 
                             <p class="mt-1 text-sm text-gray-600">
@@ -19,7 +19,7 @@
                             </p>
                         </header>
 
-                        <form method="post" action="{{ route('member.blogs.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
+                        <form method="post" action="{{ route('member.pages.store') }}" class="mt-6 space-y-6" enctype="multipart/form-data">
                             @csrf
                            
 
@@ -47,7 +47,7 @@
            </x-select>
            </div>
            <div class="flex items-center gap-4">
-            <a href="{{ route('member.blogs.index') }}">
+            <a href="{{ route('member.pages.index') }}">
                 <x-secondary-button>kembali</x-secondary-button>
             </a>
             <x-primary-button>simpan</x-primary-button>

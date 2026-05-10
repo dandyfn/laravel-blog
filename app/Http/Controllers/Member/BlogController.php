@@ -14,12 +14,14 @@ class BlogController extends Controller
     /**
      * Display a listing of the resource.
      */
+    protected $type = 'blog';
+
     public function index(Request $request)
     {
         //
         $user = Auth::user();
         $search = $request->search;
-        $data = Post::where('user_id',$user->id)->where(function($query) use ($search){
+        $data = Post::where('user_id',$user->id)->where('type',$this->type)->where(function($query) use ($search){
             if ($search) {
                 # code...
                 $query->where('title','like',"%{$search}%")->orWhere('content','like',"%{$search}%");
@@ -71,7 +73,8 @@ class BlogController extends Controller
             'status'=>$request->status,
             'thumbnail'=>isset($image_name)?$image_name:null,
             'slug'=>$this->generateslug($request->title),
-            'user_id'=>Auth::user()->id
+            'user_id'=>Auth::user()->id,
+            'type'=>$this->type
         ];
         Post::create($data);
         return redirect()->route('member.blogs.index')->with('success','data berhasil ditambahkan');
@@ -149,7 +152,7 @@ class BlogController extends Controller
                 # code...
                 unlink(public_path(getenv('CUSTOM_THUMBNAIL_LOCATION')).'/'.$post->thumbnail);
             }
-        Post::where('id',$post->id)->delete();
+        Post::where('id',$post->id)->where('type',$this->type)->delete();
         return redirect()->route('member.blogs.index')->with('success','data berhasil dihapus');
     }
 

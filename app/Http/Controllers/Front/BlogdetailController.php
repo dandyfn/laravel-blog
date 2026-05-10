@@ -10,7 +10,7 @@ class BlogdetailController extends Controller
     //
     function detail($slug) {
         // echo $slug;
-        $data = Post::where('status','publish')->where('slug',$slug)->firstOrFail();
+        $data = Post::where('status','publish')->where('type','blog')->where('slug',$slug)->firstOrFail();
         $pagination = $this->pagination($data->id);
         return view('components.front.blog-detail', compact('data','pagination'));
    
@@ -18,8 +18,8 @@ class BlogdetailController extends Controller
     
         private function pagination($id) {
         // echo $slug;
-        $dataPrev = Post::where('status','publish')->where('id','<',$id)->orderBy('id','desc')->first();
-        $dataNext = Post::where('status','publish')->where('id','>',$id)->orderBy('id','desc')->first();
+        $dataPrev = Post::where('status','publish')->where('id','<',$id)->where('type','blog')->orderBy('id','desc')->first();
+        $dataNext = Post::where('status','publish')->where('id','>',$id)->where('type','blog')->orderBy('id','desc')->first();
         $data = [
             'prev' => $dataPrev,
             'next' => $dataNext

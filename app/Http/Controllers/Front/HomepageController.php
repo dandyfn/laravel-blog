@@ -13,12 +13,12 @@ class HomepageController extends Controller
         $lastData = $this->lastData();
       
      
-        $data = Post::where('status','publish')->orderBy('id','desc')->paginate(2);
+        $data = Post::where('status','publish')->where('type','blog')->orderBy('id','desc')->paginate(2);
         return view('components.front.home-page',compact('data','lastData'));
     }
 
     public function lastData(){
-        $data = Post::where('status','publish')->orderBy('id','desc')->latest()->first();
+        $data = Post::where('status','publish')->where('type','blog')->orderBy('id','desc')->latest()->first();
         return $data;
     }
 }

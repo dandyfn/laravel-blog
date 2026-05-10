@@ -3,6 +3,7 @@
 use App\Http\Controllers\Front\BlogdetailController;
 use App\Http\Controllers\Front\HomepageController;
 use App\Http\Controllers\Member\BlogController;
+use App\Http\Controllers\Member\PageController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
@@ -28,6 +29,17 @@ Route::middleware(['auth','verified'])->group(function () {
         'destroy' => 'member.blogs.destroy'
     ])->parameters([
         'blogs'=>'post'
+    ]);
+
+    Route::resource('member/pages',PageController::class)->names([
+        'index' => 'member.pages.index',
+        'edit' => 'member.pages.edit',
+        'update' => 'member.pages.update',
+        'create' => 'member.pages.create',
+        'store' => 'member.pages.store',
+        'destroy' => 'member.pages.destroy'
+    ])->parameters([
+        'pages'=>'post'
     ]);
 });
 

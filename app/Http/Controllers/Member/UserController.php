@@ -11,10 +11,16 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        $data = User::orderBy('id','desc')->paginate(2);
+        // $data = User::orderBy('id','desc')->paginate(2);
+        $data = User::where(function ($query) use ($request) {
+            if ($request->search) {
+                # code...
+                $query->where('name','like',"%{$request->search}%")->orWhere('email','like',"%{$request->search}%");
+            }
+        })->orderBy('id','desc')->paginate(2)->withQueryString();
         return view('member.users.index',compact('data'));
     }
 

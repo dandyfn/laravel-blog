@@ -54,6 +54,8 @@ class UserController extends Controller
     public function edit(User $user)
     {
         //
+        $data = $user;
+        return view('member.users.edit',compact('data'));
     }
 
     /**

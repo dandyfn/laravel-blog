@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Front\BlogdetailController;
 use App\Http\Controllers\Front\HomepageController;
+use App\Http\Controllers\Front\PagedetailController;
 use App\Http\Controllers\Member\BlogController;
 use App\Http\Controllers\Member\PageController;
 use App\Http\Controllers\ProfileController;
@@ -48,3 +49,4 @@ require __DIR__.'/auth.php';
 
 Route::get('/{slug}',[BlogdetailController::class,'detail'])->name('blog-detail');
 
+Route::get('/page/{slug}',[PagedetailController::class,'detail'])->name('page-detail');

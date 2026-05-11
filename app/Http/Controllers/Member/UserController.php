@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -64,6 +65,26 @@ class UserController extends Controller
     public function update(Request $request, User $user)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,'.$user->id,
+        ],[
+            'name.required' => 'nama wajib diisi',
+            'email.required' => 'email wajib diisi',
+            'email.emial' => 'format.email ' .$request->email.' tidak sesuai',
+            'email.unique' => 'email sudah ada'
+        ]);
+
+        $email_verified_at = $user->email_verified_at ? $user->email_verified_at : Carbon::now();
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'email_verified_at' => $email_verified_at,
+        ];
+
+        User::where('id', $user->id)->update($data);
+        return redirect()->route('member.users.index')->with('succsess','data berhasil diupdate');
     }
 
     /**

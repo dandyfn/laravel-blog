@@ -68,11 +68,16 @@ class UserController extends Controller
         $request->validate([
             'name' => 'required',
             'email' => 'required|email|unique:users,email,'.$user->id,
+            'new_password' => 'nullable|min:6|same:new_password_confirmation|required_with:new_password_confirmation',
+            'new_password_confirmation' => 'required_with:new_password'
         ],[
             'name.required' => 'nama wajib diisi',
             'email.required' => 'email wajib diisi',
             'email.emial' => 'format.email ' .$request->email.' tidak sesuai',
-            'email.unique' => 'email sudah ada'
+            'email.unique' => 'email sudah ada',
+            'new_password.required_with' => 'password konfirmasuk harus diisi',
+            'new_password_confirmation.required_with' => 'password harus diisi'
+
         ]);
 
         $email_verified_at = $user->email_verified_at ? $user->email_verified_at : Carbon::now();
@@ -81,6 +86,7 @@ class UserController extends Controller
             'name' => $request->name,
             'email' => $request->email,
             'email_verified_at' => $email_verified_at,
+            'password' => $request -> new_password ? bcrypt($request->new_password):$user->password 
         ];
 
         User::where('id', $user->id)->update($data);

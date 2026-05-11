@@ -59,7 +59,7 @@
                             </div>
 
                             <div class="flex items-center gap-4">
-                                <a href="">
+                                <a href="{{ route('member.users.index') }}">
                                     <x-secondary-button>Kembali</x-secondary-button>
                                 </a>
                                 <x-primary-button>Simpan</x-primary-button>

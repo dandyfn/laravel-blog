@@ -100,4 +100,24 @@ class UserController extends Controller
     {
         //
     }
+
+    public function toggleBlock(User $user){
+        $pesan = '';
+        if ($user->blocked_at==null) {
+            # code...
+            $data = [
+                'blocked_at' => now()
+            ];
+            $pesan = "User ".$user->name." telah di-block";
+        } else {
+            # code...
+              # code...
+            $data = [
+                'blocked_at' => null
+            ];
+            $pesan = "User ".$user->name." telah di-unblock";
+        }
+        User::where('id',$user->id)->update($data);
+        return redirect()->back()->with('success',$pesan);
+    }
 }

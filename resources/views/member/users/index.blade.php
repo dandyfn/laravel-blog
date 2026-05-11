@@ -41,8 +41,13 @@
                                         verifikasi email: {{ $value->email_verified_at != null ? 'sudah':'-' }}</div>
                                     <div class="block lg:hidden text-sm text-gray-500">
                                         Block:
-                                        <a href="">
-                                            <span class="text-blue-600">tidak</span>
+                                        <a href="{{ route('/member/users/toggle-block',['user'=>$value]) }}">
+                                            @if ($value->blocked_at==null)
+                                               <span class="text-blue-600">tidak</span>  
+                                            @else
+                                                 <span class="text-red-600">ya</span>
+                                            @endif
+                                           
                                         </a>
                                     </div>
                                 </td>
@@ -54,9 +59,16 @@
                                     {{ $value->email_verified_at != null ? 'sudah':'-' }}
                                 </td>
                                 <td class="border px-6 py-4 text-gray-500 text-sm text-center hidden lg:table-cell">
-                                    <a href="">
-                                        <span class="text-blue-600">tidak</span>
-                                    </a>
+                                  
+                                           <a href="{{ route('/member/users/toggle-block',['user'=>$value]) }}">
+                                            @if ($value->blocked_at==null)
+                                               <span class="text-blue-600">tidak</span>  
+                                            @else
+                                                 <span class="text-red-600">ya</span>
+                                            @endif
+                                           
+                                        </a>
+                                    
                                 </td>
                                 <td class="border px-6 py-4 text-center">
                                     <a href="{{ route('member.users.edit',['user'=>$value->id]) }}" class="text-blue-600 hover:text-blue-400 px-2">edit</a>

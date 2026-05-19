@@ -23,7 +23,8 @@ class User extends Authenticatable implements MustVerifyEmail
         'name',
         'email',
         'password',
-        'blocked_at'
+        'blocked_at',
+        'email_verified_at'
     ];
 
     /**
@@ -49,3 +50,4 @@ class User extends Authenticatable implements MustVerifyEmail
         ];
     }
 }
+ 

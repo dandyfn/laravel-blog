@@ -32,6 +32,7 @@ class UserController extends Controller
     public function create()
     {
         //
+        return view('member.users.create');
     }
 
     /**
@@ -40,6 +41,32 @@ class UserController extends Controller
     public function store(Request $request)
     {
         //
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users,email,',
+            'new_password' => 'required|min:6|same:password_confirmation|required_with:password_confirmation',
+            'password_confirmation' => 'required_with:new_password'
+        ],[
+            'name.required' => 'nama wajib diisi',
+            'email.required' => 'email wajib diisi',
+            'email.emial' => 'format.email ' .$request->email.' tidak sesuai',
+            'email.unique' => 'email sudah ada',
+            'password.required_with' => 'password konfirmasuk harus diisi',
+            'password_confirmation.required_with' => 'password harus diisi'
+
+        ]);
+
+        $email_verified_at = $request->email_verified_at ? Carbon::now():null;
+
+        $data = [
+            'name' => $request->name,
+            'email' => $request->email,
+            'email_verified_at' => $email_verified_at,
+            'password' =>  bcrypt($request->new_password)
+        ];
+
+        User::create($data);
+        return redirect()->route('member.users.index')->with('succsess','data berhasil ditambahkan');
     }
 
     /**
@@ -91,6 +118,7 @@ class UserController extends Controller
         ];
 
         User::where('id', $user->id)->update($data);
+        
         return redirect()->route('member.users.index')->with('succsess','data berhasil diupdate');
     }
 
@@ -110,7 +138,8 @@ class UserController extends Controller
             }
         }
 
-        User::where('id',$user->id->delete());
+      
+        User::where('id',$user->id)->delete();
         return redirect()->back()->with('success','Data user berhasil dihapus');
     }
 
@@ -134,3 +163,4 @@ class UserController extends Controller
         return redirect()->back()->with('success',$pesan);
     }
 }
+ 

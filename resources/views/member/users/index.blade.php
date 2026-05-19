@@ -1,7 +1,7 @@
 <x-app-layout>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            Pengaturan Users <a href="" class="bg-blue-400 p-2 rounded-md text-white text-sm">+ Tambah User</a>
+            Pengaturan Users <a href="{{ route('member.users.create') }}" class="bg-blue-400 p-2 rounded-md text-white text-sm">+ Tambah User</a>
         </h2>
     </x-slot>
     <x-slot name="headerright">
@@ -93,3 +93,4 @@
         </div>
     </div>
 </x-app-layout>
+ 

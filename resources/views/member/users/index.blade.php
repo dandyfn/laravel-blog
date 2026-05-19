@@ -74,7 +74,8 @@
                                     <a href="{{ route('member.users.edit',['user'=>$value->id]) }}" class="text-blue-600 hover:text-blue-400 px-2">edit</a>
                                     <form class="inline" onsubmit="return confirm('Yakin mau hapus data user ini?')"
                                         action="{{ route('member.users.destroy',['user'=>$value->id]) }}" method="post">
-                                    
+                                    @csrf
+                                    @method('delete')
                                         <button type='submit' class='text-red-600 hover:text-red-400 px-2'>
                                             hapus
                                         </button>
